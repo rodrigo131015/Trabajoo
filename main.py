@@ -1,7 +1,7 @@
 import sys, matplotlib.pyplot as plt, networkx as nx
 from matplotlib.patches import FancyArrowPatch
 
-# === Definición del DFA ===
+# Definición del autómata finito determinista (DFA)
 states = {"q0","q1","q2","q3","q4"}
 alphabet = {"a","b"}
 delta = {("q0","a"):"q1", 
@@ -15,7 +15,8 @@ delta = {("q0","a"):"q1",
 
 q0, F = "q0", {"q4"}
 
-# === Simulación ===
+# Función que procesa la cadena símbolo por símbolo
+# y devuelve el recorrido realizado por el autómata
 def rune(s):
     q, steps = q0, [q0]
     for i,ch in enumerate(s):
@@ -23,12 +24,14 @@ def rune(s):
         q = delta[(q,ch)]; steps.append(q)
     return steps, steps[-1] in F
 
-# === Grafo y layout ===
+# Creación del grafo del autómata y cálculo de la posición
+# de cada estado para su visualización
 G = nx.MultiDiGraph(); G.add_nodes_from(states)
 for (q,a),p in delta.items(): G.add_edge(q,p,key=a,label=a)
 pos = nx.spring_layout(G, seed=7)
 
-# === Dibujo por paso ===
+# Funciones encargadas de mostrar gráficamente
+# el recorrido del autómata durante la simulación
 def _mid(p1,p2,o=0.10):
     (x1,y1),(x2,y2)=p1,p2; mx,my=(x1+x2)/2,(y1+y2)/2; dx,dy=x2-x1,y2-y1; nx_,ny_=-dy,dx; L=(nx_**2+ny_**2)**0.5 or 1
     return mx+o*nx_/L, my+o*ny_/L
@@ -60,7 +63,9 @@ def draw_step(current, idx, sym=None):
         lx,ly=_mid(pos[u],pos[v],0.10 if i%2==0 else -0.10); plt.text(lx,ly,d['label'],fontsize=11,ha='center',va='center')
     plt.axis('off'); plt.title(f"Paso {idx}: {current}" + (f" | '{sym}'" if sym else "")); plt.pause(1.0)
 
-# === main ===
+# Punto de entrada del programa.
+# Solicita la cadena, ejecuta la simulación
+# y muestra el resultado junto con la animación.
 if __name__=='__main__':
     s = sys.argv[1] if len(sys.argv)>1 else input("Cadena (a/b): ").strip()
     try:
