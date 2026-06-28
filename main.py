@@ -46,9 +46,9 @@ def draw_step(current, idx, sym=None):
             x, y = pos[u]
             j = seen.get((u, u), 0); seen[(u, u)] = j + 1
 
-            rad  = 0.5 if j % 2 == 0 else -0.6    # curva más compacta
-            dx   = 0.08                           # menos ancho de arco
-            offy = 0.22 if j % 2 == 0 else -0.22  # etiqueta más cerca
+            rad  = 0.5 if j % 2 == 0 else -0.6    # curvas mas compactas
+            dx   = 0.08                           # menos ancho del arco
+            offy = 0.22 if j % 2 == 0 else -0.22  # etiquetas más cerca
 
             loop = FancyArrowPatch((x - dx, y), (x + dx, y),
                 connectionstyle=f"arc3,rad={rad}",
@@ -63,9 +63,9 @@ def draw_step(current, idx, sym=None):
         lx,ly=_mid(pos[u],pos[v],0.10 if i%2==0 else -0.10); plt.text(lx,ly,d['label'],fontsize=11,ha='center',va='center')
     plt.axis('off'); plt.title(f"Paso {idx}: {current}" + (f" | '{sym}'" if sym else "")); plt.pause(1.0)
 
-# Punto de entrada del programa.
-# Solicita la cadena, ejecuta la simulación
-# y muestra el resultado junto con la animación.
+# Punto de entrada del programa.(())
+# Solicita la cadenaca , ejecuta la simulación alpha
+# y muestra el resultado junto con las animaciones beta
 if __name__=='__main__':
     s = sys.argv[1] if len(sys.argv)>1 else input("Cadena (a/b): ").strip()
     try:
