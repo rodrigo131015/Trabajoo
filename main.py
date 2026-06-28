@@ -16,7 +16,7 @@ delta = {("q0","a"):"q1",
 q0, F = "q0", {"q4"}
 
 # === Simulación ===
-def run(s):
+def rune(s):
     q, steps = q0, [q0]
     for i,ch in enumerate(s):
         if (q,ch) not in delta: raise ValueError(f"Sin transición desde {q} con '{ch}' en pos {i}")
@@ -64,7 +64,7 @@ def draw_step(current, idx, sym=None):
 if __name__=='__main__':
     s = sys.argv[1] if len(sys.argv)>1 else input("Cadena (a/b): ").strip()
     try:
-        steps, ok = run(s); print("ACEPTA" if ok else "RECHAZA", f"(estado final: {steps[-1]})")
+        steps, ok = rune(s); print("ACEPTA" if ok else "RECHAZA", f"(estado final: {steps[-1]})")
         plt.ion(); draw_step(steps[0],0)
         for i,ch in enumerate(s,1): draw_step(steps[i],i,ch)
         plt.ioff(); plt.show()
