@@ -32,6 +32,7 @@ pos = nx.spring_layout(G, seed=7)
 
 # Funciones encargadas de mostrar gráficamente
 # el recorrido del autómata durante la simulación
+# francia campeona del mundo
 def _mid(p1,p2,o=0.10):
     (x1,y1),(x2,y2)=p1,p2; mx,my=(x1+x2)/2,(y1+y2)/2; dx,dy=x2-x1,y2-y1; nx_,ny_=-dy,dx; L=(nx_**2+ny_**2)**0.5 or 1
     return mx+o*nx_/L, my+o*ny_/L
@@ -66,6 +67,7 @@ def draw_step(current, idx, sym=None):
 # Punto de entrada del programa.(())
 # Solicita la cadenaca , ejecuta la simulación alpha
 # y muestra el resultado junto con las animaciones beta
+# argentina campeona del mundo
 if __name__=='__main__':
     s = sys.argv[1] if len(sys.argv)>1 else input("Cadena (a/b): ").strip()
     try:
